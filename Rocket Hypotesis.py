@@ -82,26 +82,59 @@ df.apply(count_com3, axis = 1)
 df.apply(count_com4, axis = 1)
 
 #Output
-print("HYP 1")
+print('CHART INFO 1')
 print('Number of successful missions:', itr)
 print('Number of failed missions:', itr2)
-print("HYP 2")
+print('CHART INFO 2')
 print('Number of RVSN USSR rockets:', com1)
 print('Number of Arianespace rockets:', com2)
 print('Number of ULA rockets:', com3)
 print('Number of NASA rockets:', com4)
+print('TIP: Close chart before proceeding')
 
-#Chart
-c1 = pd.Series(data = [itr, itr2], index = ['Success', 'Failure'])
-c1.plot(kind = 'pie', figsize = (6, 5))
-plt.title('Status')
-plt.xlabel(None)
-plt.ylabel(None)
-plt.show()
+#Input and Plot for CHART 1
+tc1 = input('Enter type for CHART 1 (Recommended: pie. Other types: hist, box, scatter, bar, barh, line):')
+if (tc1 != 'hist' and tc1 != 'box' and tc1 != 'scatter' and tc1 != 'bar' and tc1 != 'barh' and tc1 != 'line' and tc1 != 'pie'):
+    tc1 = 'pie'
 
-c2 = pd.Series(data = [com1, com2, com3, com4], index = ['RVSN USSR', 'Arianespace', 'ULA', 'NASA'])
-c2.plot(kind = 'barh', subplots = True, grid = True, figsize = (9, 6))
-plt.title('Rockets Launched')
-plt.xlabel(None)
-plt.ylabel(None)
-plt.show()
+col1 = ''
+if (tc1 != 'pie' and tc1 != 'scatter'):
+    col1 = input('Please select colour of CHART 1:')
+    c1 = pd.Series(data = [itr, itr2], index = ['Success', 'Failure'])
+    c1.plot(kind = tc1, figsize = (6, 5), color = col1)
+    plt.title('Status')
+    plt.xlabel(None)
+    plt.ylabel(None)
+    plt.show()
+else:
+    print('Colours are unavailable for types pie and scatter.')
+    c1 = pd.Series(data = [itr, itr2], index = ['Success', 'Failure'])
+    c1.plot(kind = tc1, figsize = (6, 5))
+    plt.title('Status')
+    plt.xlabel(None)
+    plt.ylabel(None)
+    plt.show()
+
+#Input and Plot for CHART 2
+tc2 = input('Enter type for CHART 2 (Recommended: barh. Other types: hist, box, scatter, bar, pie, line):')
+if (tc2 != 'hist' and tc2 != 'box' and tc2 != 'scatter' and tc2 != 'bar' and tc2 != 'barh' and tc2 != 'line' and tc2 != 'pie'):
+    tc2 = 'barh'
+
+col2 = ''
+if (tc2 != 'pie' and tc2 != 'scatter'):
+    col2 = input('Please select colour of CHART 2:')
+    c2 = pd.Series(data = [com1, com2, com3, com4], index = ['RVSN USSR', 'Arianespace', 'ULA', 'NASA'])
+    c2.plot(kind = tc2, subplots = True, grid = True, figsize = (9, 6), color = col2)
+    plt.title('Rockets Launched')
+    plt.xlabel(None)
+    plt.ylabel(None)
+    plt.show()
+
+else:
+    print('Colours are unavailable for types pie and scatter.')
+    c2 = pd.Series(data = [com1, com2, com3, com4], index = ['RVSN USSR', 'Arianespace', 'ULA', 'NASA'])
+    c2.plot(kind = tc2, subplots = True, grid = True, figsize = (9, 6))
+    plt.title('Rockets Launched')
+    plt.xlabel(None)
+    plt.ylabel(None)
+    plt.show()
